@@ -1,7 +1,7 @@
 package Dao;
 
 public class DaoFactory {
-	private static int selectedDao = 1;
+	private static int selectedDao = 2;
 	
 	public DaoFactory getDaoFactory() {
 		return null;

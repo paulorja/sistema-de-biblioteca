@@ -4,19 +4,17 @@ import java.util.ArrayList;
 
 import Models.Pessoa;
 
-public class PgPessoaDao implements PessoaDao {
-
+public class PgPessoaDao extends PgDaoFactory implements PessoaDao {
 
 	@Override
-	public Pessoa inserir(Pessoa novoAluno) {
-		return novoAluno;
-		// TODO Auto-generated method stub
-		
+	public Pessoa inserir(Pessoa pessoa) {
+		querry("insert into Pessoa values("+pessoa.getMatricula()+","+pessoa.getTipo()+","+pessoa.getNome()+")");
+		return pessoa;
 	}
 
 	@Override
 	public Pessoa consultaPorCodMatricula(int codMatricula) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
