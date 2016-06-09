@@ -19,8 +19,7 @@ public class MenuView {
 	
 	private JFrame janela;
 
-	
-	 private JMenuBar barraMenu() {
+	private JMenuBar barraMenu() {
 	      final JMenuBar menuBar = new JMenuBar();
 	      MenuItemListener menuItemListener = new MenuItemListener();
 	      
@@ -79,11 +78,11 @@ public class MenuView {
 	
 	 class MenuItemListener implements ActionListener {
 	      public void actionPerformed(ActionEvent e) {
-	    	 action_item_menu(e.getActionCommand());
+	    	  acao_item_menu(e.getActionCommand());
 	      }    
 	   }
 	 
-	private void mostraJanela() {
+	public void mostrar() {
 		janela = new JFrame("Sistema de Biblioteca");
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -95,13 +94,14 @@ public class MenuView {
 		janela.setVisible(true);  		
 	}
 	
-	public void action_item_menu(String actionCommand) {
+	public void acao_item_menu(String actionCommand) {
 		switch (actionCommand) {
 		case "sair":
 			janela.dispose();
 			break;
 		case "cadastro_pessoa":
-			PessoaView.inserir();
+			PessoaView pessoa_view = new PessoaView();
+			pessoa_view.mostrar_cadastro();
 			break;
 		case "cadastro_livro":
 			break;
@@ -117,10 +117,6 @@ public class MenuView {
 			JOptionPane.showMessageDialog(null, "Error");
 			break;
 		}
-	}
-
-	public void show_menu() {
-		mostraJanela();		
 	}	
 	
 	
@@ -148,7 +144,8 @@ public class MenuView {
 								+ "2 - Novo\n"
 								+ "3 - Voltar"))) {
 							case 1:
-								PessoaView.consultaPorCodMatricula();
+								PessoaView pessoa_view = new PessoaView();
+								pessoa_view.mostrar_cadastro();
 								break;
 							case 2:
 								PessoaView.inserir();

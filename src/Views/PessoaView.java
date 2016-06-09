@@ -2,6 +2,7 @@ package Views;
 
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import Controllers.PessoaController;
@@ -10,6 +11,18 @@ import Dao.DaoFactory;
 import Models.Pessoa;
 
 public class PessoaView {
+	
+	private JFrame janela;
+	
+	public void mostrar_cadastro() {
+		janela = new JFrame("Cadastro de Pessoa");
+		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						
+		janela.pack();
+	    janela.setSize(480, 480);
+		
+		janela.setVisible(true);  		
+	}
 	
 	public static void inserir() {
 		char tipo = JOptionPane.showInputDialog("Digite um tipo(a ou p): ").charAt(0);
