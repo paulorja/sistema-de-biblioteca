@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 public class MenuView {
 	
 	private JFrame janela;
-	
 	 
 	public void mostrar() {
 		janela = new JFrame("Sistema de Biblioteca");
@@ -31,6 +30,36 @@ public class MenuView {
 	    janela.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 
 		janela.setVisible(true);  		
+	}
+	
+	
+	public void acao_item_menu(String actionCommand) {
+		switch (actionCommand) {
+		case "sair":
+			janela.dispose();
+			break;
+		case "cadastro_pessoa":
+			PessoaView pessoa_view = new PessoaView();
+			pessoa_view.mostrar_cadastro();
+			break;
+		case "cadastro_livro":
+			LivroView livro_view = new LivroView();
+			livro_view.mostrar_cadastro();		
+			break;
+		case "cadastro_exemplar":
+			ExemplarView exemplar_view = new ExemplarView();
+			exemplar_view.mostrar_cadastro();
+			break;
+		case "consulta_pessoa":
+			break;
+		case "consulta_livro":
+			break;
+		case "consulta_exemplar":
+			break;
+		default:
+			JOptionPane.showMessageDialog(null, "Error");
+			break;
+		}
 	}
 
 	private JMenuBar barraMenu() {
@@ -97,30 +126,6 @@ public class MenuView {
 	 }
 
 	
-	public void acao_item_menu(String actionCommand) {
-		switch (actionCommand) {
-		case "sair":
-			janela.dispose();
-			break;
-		case "cadastro_pessoa":
-			PessoaView pessoa_view = new PessoaView();
-			pessoa_view.mostrar_cadastro();
-			break;
-		case "cadastro_livro":
-			break;
-		case "cadastro_exemplar":
-			break;
-		case "consulta_pessoa":
-			break;
-		case "consulta_livro":
-			break;
-		case "consulta_exemplar":
-			break;
-		default:
-			JOptionPane.showMessageDialog(null, "Error");
-			break;
-		}
-	}	
 	
 	
 	public void show() {

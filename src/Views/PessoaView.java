@@ -20,32 +20,25 @@ import Dao.PessoaDao;
 import Dao.DaoFactory;
 import Models.Pessoa;
 
-public class PessoaView {
+public class PessoaView extends CrudView {
 	
-	private JFrame janela;
-	private JPanel painel;
-	private JButton botaoSalvar;
-	private JButton botaoCancelar;
 	private JTextField input_nome;
 	private JTextField input_matricula;
 	private JRadioButton professor_radio;
 	private JRadioButton aluno_radio;
 	
 	public void mostrar_cadastro() {
-		janela = new JFrame("Cadastro de Pessoa");
-		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						
-		janela.pack();
-		janela.setResizable(false);
-	    janela.setSize(360, 200); 	    
-	    janela.setLocationRelativeTo(null);
-	    
-	    prepara_painel();
-	    
-		janela.setVisible(true);  		
+		super.mostrar_cadastro();
+		
+		janela.setTitle("Cadastro de Pessoa");
 	}
 	
-	private void prepara_form() {
+	protected void prepara_painel() {
+		super.prepara_painel();
+		painel.setLayout(new GridLayout(4, 2));
+	}
+	
+	protected void prepara_form() {
 		
 		painel.add(new JLabel("Nome"));
 		input_nome = new JTextField();		
@@ -66,53 +59,23 @@ public class PessoaView {
 		
 	}
 	
-	private void prepara_painel() {		
-		painel = new JPanel(new GridLayout(4, 2));
+	protected void acao_salvar() {
+		Pessoa novaPessoa = new Pessoa(Integer.parseInt(input_matricula.getText()), 'p', input_nome.getText());
+
+		if(PessoaController.inserir(novaPessoa) != null) {
+			JOptionPane.showMessageDialog(null, "Pessoa inserida!");
+			janela.dispose();
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro!");
+		}
 		
-		painel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-		prepara_form();
-		prepara_botao_cancelar();
-		prepara_botao_salvar();
-		
-		janela.add(painel);
+    	System.out.println("salvar!");
 	}
 	
-	private void prepara_botao_salvar() {
-	    botaoSalvar = new JButton("Salvar");
-	    
-	    botaoSalvar.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	    		Pessoa novaPessoa = new Pessoa(Integer.parseInt(input_matricula.getText()), 'p', input_nome.getText());
-
-	    		if(PessoaController.inserir(novaPessoa) != null) {
-	    			JOptionPane.showMessageDialog(null, "Pessoa inserida!");
-	    			janela.dispose();
-	    		} else {
-	    			JOptionPane.showMessageDialog(null, "Erro!");
-	    		}
-	    		
-	        	System.out.println("salvar!");
-	        }
-	    });
-	    
-	    painel.add(botaoSalvar);
-	}
-	
-	private void prepara_botao_cancelar() {
-	    botaoCancelar = new JButton("Cancelar");
-	    
-	    botaoCancelar.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	        	janela.dispose();
-	        }
-	    });
-	    
-	    painel.add(botaoCancelar);
-	}
-
 	
 	
+	
+	// == OLD == 
 	public static void inserir() {
 		char tipo = JOptionPane.showInputDialog("Digite um tipo(a ou p): ").charAt(0);
 		if(tipo != 'a' && tipo != 'p') {

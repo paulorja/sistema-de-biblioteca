@@ -14,7 +14,21 @@ import Models.Pessoa;
 import Models.Exemplar;
 import Models.Livro;
 
-public class ExemplarView {
+public class ExemplarView extends CrudView {
+
+	@Override
+	protected void acao_salvar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void prepara_form() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	// == OLD ==
 	
 	public static void inserir() {
 		int codExemplar = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do exemplar: "));
