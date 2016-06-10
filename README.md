@@ -1,4 +1,3 @@
-# trabBibliotecaProg2
-Trabalho para a aula de programação 2 da UNISUL
+# Sistema para Bibliotecas
 
-Trablho feito para disciplina de programação 2 da UNISUL
+Trabalho para a unidade de aprendizagem Tópicos Avançados de Programação da UNISUL
