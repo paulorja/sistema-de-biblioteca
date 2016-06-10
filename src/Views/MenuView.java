@@ -18,6 +18,20 @@ import javax.swing.JPanel;
 public class MenuView {
 	
 	private JFrame janela;
+	
+	 
+	public void mostrar() {
+		janela = new JFrame("Sistema de Biblioteca");
+		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		janela.setJMenuBar(barraMenu());
+		
+		janela.pack();
+	    janela.setSize(540, 540);
+	    janela.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+
+		janela.setVisible(true);  		
+	}
 
 	private JMenuBar barraMenu() {
 	      final JMenuBar menuBar = new JMenuBar();
@@ -80,19 +94,8 @@ public class MenuView {
 	      public void actionPerformed(ActionEvent e) {
 	    	  acao_item_menu(e.getActionCommand());
 	      }    
-	   }
-	 
-	public void mostrar() {
-		janela = new JFrame("Sistema de Biblioteca");
-		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		janela.setJMenuBar(barraMenu());
-		
-		janela.pack();
-	    janela.setSize(540, 540);
-		
-		janela.setVisible(true);  		
-	}
+	 }
+
 	
 	public void acao_item_menu(String actionCommand) {
 		switch (actionCommand) {
