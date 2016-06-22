@@ -1,8 +1,8 @@
 package Dao;
 
 public class DaoFactory {
-	private static int selectedDao = 2;
-	
+	private static int selectedDao = 0;
+
 	public DaoFactory getDaoFactory() {
 		return null;
 	}
@@ -15,7 +15,7 @@ public class DaoFactory {
 		}
 		return null;
 	}
-	
+
 	public static PessoaDao getPessoaDao() {
 		if(selectedDao == 1) {
 			return new ArquivoPessoaDao();
@@ -23,7 +23,7 @@ public class DaoFactory {
 			return new PgPessoaDao();
 		}
 	}
-	
+
 	public static LivroDao getLivroDao() {
 		if(selectedDao == 1) {
 			return new ArquivoLivroDao();
@@ -31,5 +31,5 @@ public class DaoFactory {
 			//return new PgLivroDao();
 		}
 		return null;
-	}	
+	}
 }

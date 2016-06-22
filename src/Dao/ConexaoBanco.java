@@ -19,14 +19,14 @@ public class ConexaoBanco {
   			setDriverjdbc("org.postgresql.Driver");
   		 }else {
   			if (bd.equals("MySql")) {
-     				setStr_conexao("jdbc:mysql://"+ local +":" + porta +"/"+ banco); 
+     				setStr_conexao("jdbc:mysql://"+ local +":" + porta +"/"+ banco);
      				setLocal(local);
      				setSenha(senha);
      				setUser(user);
      				setDriverjdbc("com.mysql.jdbc.Driver");
  			}
 		}
-  	} 
+  	}
 
 	public void configUser(String user, String senha) {
 		setUser(user);
@@ -46,7 +46,7 @@ public class ConexaoBanco {
 		}catch (Exception e) {
 			System.err.println(e);
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public void disconect(){
@@ -65,7 +65,7 @@ public class ConexaoBanco {
 			ex.printStackTrace();
 			return null;
 		}
-	} 
+	}
 
 	// GETs AND SETs
 	public String getLocal() {
