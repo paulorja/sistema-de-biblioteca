@@ -1,17 +1,32 @@
 package Dao;
-import Dao.ConexaoBanco;
-public class PgDaoFactory {
-	private String url;
-	private String user;
-	private String password;
-	ConexaoBanco c = new ConexaoBanco("PostgreSql","localhost","5432","biblioteca","postgres","12345");
+import java.sql.ResultSet;
+public abstract class PgDaoFactory {
 
-	public void querry(String conteudo){
-		try {
-		c.conect();
-		c.query(conteudo);
-		c.disconect();
-		} catch (Exception e) {
-		}
-	}
+	private ConexaoBanco conexao = new ConexaoBanco("localhost","5432","biblioteca","postgres","12345");
+
+    public void startConexao(){
+        conexao.conect();
+    }
+
+    public void closeConexao(){
+        conexao.disconect();
+    }
+
+    protected ResultSet executeQuery(String sql){
+        startConexao();
+        ResultSet rs = conexao.query(sql);
+        closeConexao();
+        return rs;
+    }
+
+    protected int executeUpdate(String sql){
+        startConexao();
+        int rs = conexao.queryUpdate(sql);
+        closeConexao();
+        return rs;
+    }
+
+    public void setConexao(ConexaoBanco conexao) {
+        this.conexao = conexao;
+    }
 }
