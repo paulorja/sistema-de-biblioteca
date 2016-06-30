@@ -11,8 +11,8 @@ public class PgExemplarDao extends PgDaoFactory implements ExemplarDao {
 	public Exemplar inserir(Exemplar exemplar) {
 		try {
 			String sql=("INSERT INTO Exemplar VALUES("
-			+ exemplar.getCodigo() + ",'" + exemplar.codLivro()
-			+ "','" + exemplar.codMatricula()+"')");
+			+ exemplar.getCodigo() + ",'" + exemplar.getCodLivro()
+			+ "','" + exemplar.getCodMatricula()+"')");
 			executeUpdate(sql);
 		} catch (Exception e) {
             System.out.println(e);
@@ -45,7 +45,7 @@ public class PgExemplarDao extends PgDaoFactory implements ExemplarDao {
 	public void alterarPorCod(Exemplar exemplar) {
 		try {
 			String sql=("Update Exemplar set codMatricula='"
-			+ exemplar.getNome() + "',tipo='"+exemplar.getTipo()+"' where codigo="+exemplar.getCodigo());
+			+ exemplar.getCodMatricula() + "',tipo='"+exemplar.getCodLivro()+"' where codigo="+exemplar.getCodigo());
 			executeUpdate(sql);
 		} catch (Exception e) {
 			System.out.println(e);

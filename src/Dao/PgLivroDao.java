@@ -11,7 +11,7 @@ public class PgLivroDao extends PgDaoFactory implements LivroDao {
 	public Livro inserir(Livro livro) {
 		try {
 			String sql=("INSERT INTO Livro VALUES("
-			+ livro.getCodigo() + ",'" + livro.titulo()
+			+ livro.getCodigo() + ",'" + livro.getTitulo()
 			+ "','" + livro.getAutor()+"')");
 			executeUpdate(sql);
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public class PgLivroDao extends PgDaoFactory implements LivroDao {
 	public void alterarPorCod(Livro livro) {
 		try {
 			String sql=("Update Livro set titulo='"
-			+ livro.getNome() + "',autor='"+livro.titulo()+"' where codigo="+livro.getCodigo());
+			+ livro.getTitulo() + "',autor='"+livro.getTitulo()+"' where codigo="+livro.getCodigo());
 			executeUpdate(sql);
 		} catch (Exception e) {
 			System.out.println(e);
