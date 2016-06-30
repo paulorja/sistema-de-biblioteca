@@ -40,6 +40,15 @@ public class ExemplarView extends CrudView {
 			input_codigo.disable();
 			
 			input_codigo.setText(""+exemplar.getCodigo());
+			
+			Pessoa pessoa = PessoaController.consultaPorCodMatricula(exemplar.getCodMatricula());
+			String pessoa_selecionada = pessoa.getMatricula() + " - " + pessoa.getNome();
+			combo_box_pessoa.setSelectedItem(pessoa_selecionada);
+			
+			Livro livro = LivroController.consultaPorCod(exemplar.getCodLivro());
+			String livro_selecionado = livro.getCodigo() + " - " + livro.getTitulo();
+			combo_box_livro.setSelectedItem(livro_selecionado);
+			
 		} else {
 			janela.setTitle("Cadastro de Exemplar");
 		}
@@ -47,13 +56,13 @@ public class ExemplarView extends CrudView {
 	
 	protected void acao_salvar() {
 		if(exemplar != null) {
-			//livro.setAutor(input_autor.getText());
-			//livro.setTitulo(input_titulo.getText());
+			exemplar.setCodLivro(get_cod_livro());
+			exemplar.setCodMatricula(get_cod_matricula());
 			
-			//LivroController.alterarPorCod(livro);
-			//JOptionPane.showMessageDialog(null, "Livro editado!");
+			ExemplarController.alterarPorCod(exemplar);
+			JOptionPane.showMessageDialog(null, "Exemplar editado!");
 		} else {
-			Exemplar novoExemplar = new Exemplar(Integer.parseInt(input_codigo.getText()), get_cod_autor(), get_cod_matricula());
+			Exemplar novoExemplar = new Exemplar(Integer.parseInt(input_codigo.getText()), get_cod_livro(), get_cod_matricula());
 
 			if(ExemplarController.inserir(novoExemplar) != null) {
 				JOptionPane.showMessageDialog(null, "Exemplar Inserido");
@@ -68,7 +77,7 @@ public class ExemplarView extends CrudView {
 		return Integer.parseInt(array_pessoa[0]);
 	}
 
-	private int get_cod_autor() {
+	private int get_cod_livro() {
 		String[] array_autor = combo_box_livro.getSelectedItem().toString().split(" - ");
 		return Integer.parseInt(array_autor[0]);
 	}
