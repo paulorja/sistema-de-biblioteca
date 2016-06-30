@@ -34,27 +34,35 @@ public class MenuView {
 	
 	
 	public void acao_item_menu(String actionCommand) {
+		PessoaView pessoa_view = new PessoaView();
+		LivroView livro_view = new LivroView();
+		ExemplarView exemplar_view = new ExemplarView();
+		ConsultaView consulta_view = new ConsultaView();
+		
 		switch (actionCommand) {
 		case "sair":
 			janela.dispose();
 			break;
 		case "cadastro_pessoa":
-			PessoaView pessoa_view = new PessoaView();
 			pessoa_view.mostrar_cadastro();
 			break;
 		case "cadastro_livro":
-			LivroView livro_view = new LivroView();
 			livro_view.mostrar_cadastro();		
 			break;
 		case "cadastro_exemplar":
-			ExemplarView exemplar_view = new ExemplarView();
 			exemplar_view.mostrar_cadastro();
 			break;
-		case "consulta_pessoa":
+		case "consulta_aluno":
+			consulta_view.mostrar_consulta_aluno();
+			break;
+		case "consulta_prof":
+			consulta_view.mostrar_consulta_professor();
 			break;
 		case "consulta_livro":
+			consulta_view.mostrar_consulta_livro();
 			break;
 		case "consulta_exemplar":
+			consulta_view.mostrar_consulta_exemplar();
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Error");
@@ -84,9 +92,12 @@ public class MenuView {
 	      
 	      JMenu consultas = new JMenu("Consultas"); 
 		      
-	      JMenuItem consultas_pessoa = new JMenuItem("Pessoa");
-	      consultas_pessoa.setActionCommand("consulta_pessoa");
+	      JMenuItem consultas_aluno = new JMenuItem("Aluno");
+	      consultas_aluno.setActionCommand("consulta_aluno");
 		  
+	      JMenuItem consultas_prof = new JMenuItem("Professor");
+	      consultas_prof.setActionCommand("consulta_prof");
+	      
 	      JMenuItem consultas_livro = new JMenuItem("Livro");
 	      consultas_livro.setActionCommand("consulta_livro");
 		  
@@ -98,8 +109,9 @@ public class MenuView {
 	      cadastros.add(cadastros_pessoa);
 	      cadastros.add(cadastros_livro);
 	      cadastros.add(cadastros_exemplar);
-	      
-	      consultas.add(consultas_pessoa);
+
+	      consultas.add(consultas_aluno);
+	      consultas.add(consultas_prof);
 	      consultas.add(consultas_livro);
 	      consultas.add(consultas_exemplar);
 	      
@@ -111,7 +123,8 @@ public class MenuView {
 		  cadastros_pessoa.addActionListener(menuItemListener);
 		  cadastros_livro.addActionListener(menuItemListener);
 		  cadastros_exemplar.addActionListener(menuItemListener);
-	      consultas_pessoa.addActionListener(menuItemListener);
+	      consultas_aluno.addActionListener(menuItemListener);
+	      consultas_prof.addActionListener(menuItemListener);
 	      consultas_livro.addActionListener(menuItemListener);
 	      consultas_exemplar.addActionListener(menuItemListener);
 
@@ -124,87 +137,5 @@ public class MenuView {
 	    	  acao_item_menu(e.getActionCommand());
 	      }    
 	 }
-
-	
-	
-	
-	public void show() {
-		boolean	fecharSistema = false;
-		boolean	fecharPessoa;
-		boolean	fecharLivros;
-		boolean	fecharExemplares;
-		
-		while(fecharSistema == false) {
-			fecharPessoa = false;
-			fecharLivros = false;
-			fecharExemplares = false;
-			
-			switch (Integer.parseInt(JOptionPane.showInputDialog("[[BIBLIOTECA]] - Menu\n"
-					+ "1 - Pessoas\n"
-					+ "2 - Livros\n"
-					+ "3 - Exemplares\n"
-					+ "4 - Sair"))) {
-			
-				case 1:
-					while(fecharPessoa == false) {
-						switch (Integer.parseInt(JOptionPane.showInputDialog("[[PESSOAS]] - Menu\n"
-								+ "1 - Consultar\n"
-								+ "2 - Novo\n"
-								+ "3 - Voltar"))) {
-							case 1:
-								PessoaView pessoa_view = new PessoaView();
-								pessoa_view.mostrar_cadastro();
-								break;
-							case 2:
-								PessoaView.inserir();
-								break;
-							case 3:
-								fecharPessoa = true;
-								break;
-							}
-					}
-					break;	
-				case 2:
-					while(fecharLivros == false) {
-						switch (Integer.parseInt(JOptionPane.showInputDialog("[[LIVROS]] - Menu\n"
-								+ "1 - Consultar\n"
-								+ "2 - Novo\n"
-								+ "3 - Voltar"))) {
-							case 1:
-								LivroView.consultarPorCod();
-								break;
-							case 2:
-								LivroView.inserir();
-								break;
-							case 3:
-								fecharLivros = true;
-								break;
-						}
-					}
-					break;
-				case 3:
-					while(fecharExemplares == false) {
-						switch (Integer.parseInt(JOptionPane.showInputDialog("[[EXEMPLARES]] - Menu\n"
-								+ "1 - Consultar\n"
-								+ "2 - Novo\n"
-								+ "3 - Voltar"))) {
-							case 1:
-								ExemplarView.consultarPorCod();
-								break;
-							case 2:
-								ExemplarView.inserir();
-								break;
-							case 3:
-								fecharExemplares = true;
-								break;
-						}
-					}
-					break;
-				case 4:
-					fecharSistema = true;
-					break;
-			}			
-		}
-	}
 
 }
