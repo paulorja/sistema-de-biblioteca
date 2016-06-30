@@ -35,17 +35,17 @@ public class PessoaView extends CrudView {
 		if(pessoa != null) {
 			this.pessoa = pessoa;
 			prepara_botao_excluir();
-			
+
 			janela.setTitle("Editar Pessoa");
 
 			input_matricula.disable();
-			
+
 			input_nome.setText(pessoa.getNome());
 			input_matricula.setText(""+pessoa.getMatricula());
 		} else {
 			janela.setTitle("Cadastro de Pessoa");
 		}
-		
+
 	}
 
 	protected void prepara_painel() {
@@ -80,25 +80,29 @@ public class PessoaView extends CrudView {
 	protected void acao_salvar() {
 		if(pessoa != null) {
 			pessoa.setNome(input_nome.getText());
-			
 			PessoaController.alterarPorCodMatricula(pessoa);
 			JOptionPane.showMessageDialog(null, "Pessoa editada!");
 		} else {
-			Pessoa novaPessoa = new Pessoa(Integer.parseInt(input_matricula.getText()), 'p', input_nome.getText());
-
+			char radio='x';
+			if (professor_radio.isSelected()){
+				radio='p';
+			}else{
+				radio='a';
+			}
+			Pessoa novaPessoa = new Pessoa(Integer.parseInt(input_matricula.getText()), radio, input_nome.getText());
 			if(PessoaController.inserir(novaPessoa) != null) {
 				JOptionPane.showMessageDialog(null, "Pessoa inserida!");
 			} else {
 				JOptionPane.showMessageDialog(null, "Erro!");
 			}
 		}
-		
+
 		janela.dispose();
 	}
-	
+
 	protected void prepara_botao_excluir() {
 	    botaoExcluir= new JButton("Excluir");
-	    
+
 	    botaoExcluir.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	PessoaController.removerPorCodMatricula(Integer.parseInt(input_matricula.getText()));
@@ -106,7 +110,7 @@ public class PessoaView extends CrudView {
 				janela.dispose();
 	        }
 	    });
-	    
+
 	    painel.add(botaoExcluir);
 	}
 }
