@@ -15,28 +15,28 @@ import javax.swing.border.EmptyBorder;
 public class RemoveView {
 
 	protected JButton botaoCancelar;
-	private JButton botaoPesquisar;
+	private JButton botaoRemover;
 	protected JFrame janela;
 	protected JPanel painel;
 	private JTextField input_busca;
 	private String texto_busca;
 
 
-	private void acao_pesquisar() {
+	private void acao_remover() {
 
 	}
 
 
 	protected void prepara_botao_salvar() {
-		botaoPesquisar = new JButton("Remover");
+		botaoRemover = new JButton("Remover");
 
-		botaoPesquisar.addActionListener(new ActionListener() {
+		botaoRemover.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	    		acao_pesquisar();
+	    		acao_remover();
 	        }
 	    });
 
-	    painel.add(botaoPesquisar);
+	    painel.add(botaoRemover);
 	}
 
 	protected void prepara_botao_cancelar() {
