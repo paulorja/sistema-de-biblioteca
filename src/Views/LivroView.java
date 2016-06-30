@@ -70,20 +70,21 @@ public class LivroView extends CrudView {
 	}
 
 	protected void acao_salvar() {
-		Livro novoLivro = new Livro(Integer.parseInt(input_codigo.getText()), input_titulo.getText(), input_autor.getText());
-
-		if(LivroController.inserir(novoLivro) != null) {
-			JOptionPane.showMessageDialog(null, "Livro Inserido");
-			janela.dispose();
+		if(livro != null) {
+			LivroController.alterarPorCod(livro);
+			JOptionPane.showMessageDialog(null, "Livro editado!");
 		} else {
-			JOptionPane.showMessageDialog(null, "Erro!");
+			Livro novoLivro = new Livro(Integer.parseInt(input_codigo.getText()), input_titulo.getText(), input_autor.getText());
+
+			if(LivroController.inserir(novoLivro) != null) {
+				JOptionPane.showMessageDialog(null, "Livro Inserido");
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro!");
+			}
 		}
-
-    	System.out.println("salvar!");
+		
+		janela.dispose();
 	}
-
-
-
 
 	private static void remover(int cod) {
 		if (JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja excluir o livro com o codigo "+cod+"?") == 0) {
