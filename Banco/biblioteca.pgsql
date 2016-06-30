@@ -38,7 +38,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE exemplar (
-    codigo integer NOT NULL,
+    codigo integer NOT NULL UNIQUE,
     codigolivro integer,
     codmatricula integer
 );
@@ -72,7 +72,7 @@ ALTER SEQUENCE exemplar_codigo_seq OWNED BY exemplar.codigo;
 --
 
 CREATE TABLE livro (
-    codigo integer NOT NULL,
+    codigo integer NOT NULL UNIQUE,
     titulo character(100),
     autor character(100)
 );
@@ -106,7 +106,7 @@ ALTER SEQUENCE livro_codigo_seq OWNED BY livro.codigo;
 --
 
 CREATE TABLE pessoa (
-    matricula integer NOT NULL,
+    matricula integer NOT NULL UNIQUE,
     tipo character(1),
     name character(100)
 );
