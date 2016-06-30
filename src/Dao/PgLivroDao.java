@@ -63,4 +63,10 @@ public class PgLivroDao extends PgDaoFactory implements LivroDao {
 		}
 	}
 
+	@Override
+	public ArrayList<Livro> listaLivros() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

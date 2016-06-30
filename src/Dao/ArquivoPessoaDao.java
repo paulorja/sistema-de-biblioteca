@@ -85,4 +85,18 @@ public class ArquivoPessoaDao extends ArquivoDaoFactory implements PessoaDao {
 		}
 		return -1;
 	}
+
+	@Override
+	public ArrayList<Pessoa> listaPessoas() {
+		lerLinhasArquivo();
+
+		ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
+		
+		for(String linha: conteudoArquivo) {
+			String[] splitPessoa = linha.split(";");
+			pessoas.add(new Pessoa(Integer.parseInt(splitPessoa[0]), splitPessoa[1].charAt(0), splitPessoa[2]));
+		}
+		
+		return pessoas;
+	}
 }

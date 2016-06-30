@@ -1,8 +1,12 @@
 package Views;
 
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controllers.PessoaController;
 import Controllers.ExemplarController;
@@ -16,18 +20,63 @@ import Models.Livro;
 
 public class ExemplarView extends CrudView {
 
-	@Override
+	private Exemplar exemplar;
+	private JTextField input_codigo;
+	private JComboBox<String> combo_box_pessoa;
+	private JComboBox<String> combo_box_livro;
+
+	protected void mostrar_cadastro(Exemplar exemplar) {
+		super.mostrar_cadastro();
+		
+		if(exemplar != null) {
+			this.exemplar = exemplar;
+			prepara_botao_excluir();
+			
+			janela.setTitle("Editar Exemplar");
+
+			input_codigo.disable();
+			
+			input_codigo.setText(""+exemplar.getCodigo());
+		} else {
+			janela.setTitle("Cadastro de Exemplar");
+		}
+	}
+	
 	protected void acao_salvar() {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	protected void prepara_form() {
-		// TODO Auto-generated method stub
 
+		painel.add(new JLabel("Código"));
+		input_codigo = new JTextField();
+		painel.add(input_codigo);
+
+		painel.add(new JLabel("Pessoa"));
+				
+		combo_box_pessoa = new JComboBox<String>();
+		for(Pessoa p: PessoaController.listaPessoas()) {
+			combo_box_pessoa.addItem(p.getMatricula() + " - " + p.getNome());
+		}
+		
+		painel.add(combo_box_pessoa);
+		
+		painel.add(new JLabel("Livro"));
+
+		combo_box_livro = new JComboBox<String>();
+		for(Livro l: LivroController.listarLivros()) {
+			combo_box_livro.addItem(l.getCodigo() + " - " + l.getTitulo());
+		}
+	
+		painel.add(combo_box_livro);
+		
 	}
 
+	protected void prepara_painel() {
+		super.prepara_painel();
+		painel.setLayout(new GridLayout(5, 2));
+	}
+	
 	@Override
 	protected void prepara_botao_excluir() {
 		// TODO Auto-generated method stub

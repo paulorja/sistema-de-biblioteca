@@ -28,4 +28,9 @@ public class PessoaController {
 		PessoaDao dao = DaoFactory.getPessoaDao();
 		dao.alterarPorCodMatricula(aluno);	
 	}
+	
+	public static ArrayList<Pessoa> listaPessoas() {
+		PessoaDao dao = DaoFactory.getPessoaDao();
+		return dao.listaPessoas();	
+	}
 }

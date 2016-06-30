@@ -31,4 +31,9 @@ public class LivroController {
 		LivroDao dao = DaoFactory.getLivroDao();
 		dao.alterarPorCod(livro);
 	}
+	
+	public static ArrayList<Livro> listarLivros() {
+		LivroDao dao = DaoFactory.getLivroDao();
+		return dao.listaLivros();	
+	}
 }

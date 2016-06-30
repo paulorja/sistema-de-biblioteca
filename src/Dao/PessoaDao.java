@@ -9,4 +9,5 @@ public interface PessoaDao {
 	public Pessoa consultaPorCodMatricula(int codMatricula);
 	public void alterarPorCodMatricula(Pessoa pessoa);
 	public void removerPorCodMatricula(int codMatricula);
+	public ArrayList<Pessoa> listaPessoas();
 }

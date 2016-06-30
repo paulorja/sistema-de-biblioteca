@@ -1,5 +1,7 @@
 package Dao;
 
+import java.util.ArrayList;
+
 import Models.Livro;
 import Models.Pessoa;
 
@@ -84,6 +86,19 @@ public class ArquivoLivroDao extends ArquivoDaoFactory implements LivroDao {
 			}
 		}
 		return -1;
+	}
+
+	public ArrayList<Livro> listaLivros() {
+		lerLinhasArquivo();
+
+		ArrayList<Livro> livros = new ArrayList<Livro>();
+		
+		for(String linha: conteudoArquivo) {
+			String[] splitLivro = linha.split(";");
+			livros.add(new Livro(Integer.parseInt(splitLivro[0]), splitLivro[1], splitLivro[2]));
+		}
+		
+		return livros;
 	}
 
 }

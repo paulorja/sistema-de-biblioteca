@@ -63,4 +63,10 @@ public class PgPessoaDao extends PgDaoFactory implements PessoaDao {
 		}
 	}
 
+	@Override
+	public ArrayList<Pessoa> listaPessoas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
