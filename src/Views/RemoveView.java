@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,14 +23,16 @@ public class RemoveView {
 	protected JPanel painel;
 	private JTextField input_remove;
 	private String texto_remove;
+	private JRadioButton professor_radio;
+	private JRadioButton aluno_radio;
 
 
 	private void acao_remover() {
-
+		
 	}
 
 
-	protected void prepara_botao_salvar() {
+	protected void prepara_botao_remover() {
 		botaoRemover = new JButton("Remover");
 
 		botaoRemover.addActionListener(new ActionListener() {
@@ -54,13 +57,13 @@ public class RemoveView {
 	}
 
 	protected void prepara_painel() {
-		painel = new JPanel(new GridLayout(2, 2));
+		painel = new JPanel(new GridLayout(3, 2));
 
 		painel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		prepara_form();
 		prepara_botao_cancelar();
-		prepara_botao_salvar();
+		prepara_botao_remover();
 
 		janela.add(painel);
 	};
@@ -69,6 +72,17 @@ public class RemoveView {
 		painel.add(new JLabel(texto_remove));
 		input_remove = new JTextField();
 		painel.add(input_remove);
+
+		painel.add(new JLabel("Tipo"));
+		aluno_radio = new JRadioButton("Aluno",true);
+		professor_radio = new JRadioButton("Professor",false);
+		ButtonGroup grupoPessoa = new ButtonGroup();
+		grupoPessoa.add(aluno_radio);
+		grupoPessoa.add(professor_radio);
+		JPanel radio_painel = new JPanel(new GridLayout(1, 2));
+		radio_painel.add(aluno_radio);
+		radio_painel.add(professor_radio);
+		painel.add(radio_painel);
 	}
 
 
@@ -78,7 +92,7 @@ public class RemoveView {
 
 		janela.pack();
 		janela.setResizable(false);
-	    janela.setSize(440, 120);
+	    janela.setSize(440, 200);
 	    janela.setLocationRelativeTo(null);
 		janela.setVisible(true);
 	}

@@ -74,9 +74,6 @@ public class MenuView {
 		case "remover_livro":
 			remover_view.remover_livro();
 			break;
-		case "remover_exemplar":
-			remover_view.remover_exemplar();
-			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Error");
 			break;
@@ -127,12 +124,8 @@ public class MenuView {
 	      JMenuItem remover_pessoa = new JMenuItem("Pessoa");
 	      remover_pessoa.setActionCommand("remover_pessoa");
 
-
 	      JMenuItem remover_livro = new JMenuItem("Livro");
 	      remover_livro.setActionCommand("remover_livro");
-
-	      JMenuItem remover_exemplar = new JMenuItem("Exemplar");
-	      remover_exemplar.setActionCommand("remover_exemplar");
 
 	      arquivo.add(sair);
 		  arquivo.add(mudar_dao);
@@ -148,8 +141,6 @@ public class MenuView {
 
 		  remover.add(remover_pessoa);
 	      remover.add(remover_livro);
-	      remover.add(remover_exemplar);
-
 
 	      menuBar.add(arquivo);
 	      menuBar.add(cadastros);
@@ -167,8 +158,6 @@ public class MenuView {
 	      consultas_exemplar.addActionListener(menuItemListener);
 		  remover_pessoa.addActionListener(menuItemListener);
 	      remover_livro.addActionListener(menuItemListener);
-	      remover_exemplar.addActionListener(menuItemListener);
-
 
 	      return menuBar;
 	 }

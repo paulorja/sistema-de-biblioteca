@@ -45,7 +45,7 @@ public class PgExemplarDao extends PgDaoFactory implements ExemplarDao {
 	public void alterarPorCod(Exemplar exemplar) {
 		try {
 			String sql=("Update Exemplar set codMatricula='"
-			+ exemplar.getCodMatricula() + "',tipo='"+exemplar.getCodLivro()+"' where codigo="+exemplar.getCodigo());
+			+ exemplar.getCodMatricula() + "',codigolivro='"+exemplar.getCodLivro()+"' where codigo="+exemplar.getCodigo());
 			executeUpdate(sql);
 		} catch (Exception e) {
 			System.out.println(e);

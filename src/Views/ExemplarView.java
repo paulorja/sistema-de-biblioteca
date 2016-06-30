@@ -19,21 +19,21 @@ public class ExemplarView extends CrudView {
 	@Override
 	protected void acao_salvar() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void prepara_form() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	// == OLD ==
-	
+
 	public static void inserir() {
 		int codExemplar = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do exemplar: "));
 		int codLivro = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do livro: "));
-		
+
 		Exemplar novoExemplar = new Exemplar(codExemplar, codLivro);
 		if(ExemplarController.inserir(novoExemplar) != null) {
 			JOptionPane.showMessageDialog(null, "Exemplar inserido!");
@@ -41,36 +41,36 @@ public class ExemplarView extends CrudView {
 			JOptionPane.showMessageDialog(null, "Código já utilizado!!");
 		}
 	}
-	
+
 	public static void alugar(Exemplar exemplar) {
 		int codMatricula = Integer.parseInt(JOptionPane.showInputDialog("Digite o código de matrícula: "));
 		exemplar.setCodMatricula(codMatricula);
-		
+
 		ExemplarController.alugar(exemplar);
 	}
-	
+
 	public static void consultarPorCod() {
 		int cod = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do exemplar"));
-		
+
 		Exemplar exemplarPesquisado = ExemplarController.consultaPorCod(cod);
-		
+
 		if(exemplarPesquisado != null) {
 			menuExemplar(exemplarPesquisado);
 		} else {
 			JOptionPane.showMessageDialog(null, "Não encotrado");
 		}
-		
-		
+
+
 	}
 
 	private static void menuExemplar(Exemplar exemplarPesquisado) {
 		Livro livro = ExemplarController.getLivro(exemplarPesquisado.getCodLivro());
-		
+
 		Pessoa pessoa = null;
 		if(exemplarPesquisado.getCodMatricula() != 0) {
 			pessoa = ExemplarController.getPessoa(exemplarPesquisado.getCodMatricula());
-		} 
-		
+		}
+
 		int opcao = Integer.parseInt(JOptionPane.showInputDialog("Exemplar encontrado: \n"
 				+ "-----------------------------------\n"
 				+ "Codigo do exemplar: "+exemplarPesquisado.getCodigo()+"\n"
@@ -81,7 +81,7 @@ public class ExemplarView extends CrudView {
 				+ "2 - Alugar \n"
 				+ "3 - Devolver \n"
 				+ "4 - Voltar \n"));
-		
+
 		switch (opcao) {
 		case 1:
 			ExemplarView.remover(exemplarPesquisado.getCodigo());
@@ -101,7 +101,7 @@ public class ExemplarView extends CrudView {
 	private static void devolver(Exemplar exemplar) {
 		exemplar.setCodMatricula(0);
 		ExemplarController.devolver(exemplar);
-		
+
 		JOptionPane.showMessageDialog(null, "Devolvido!");
 	}
 
