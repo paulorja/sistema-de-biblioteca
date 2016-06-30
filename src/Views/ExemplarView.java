@@ -119,7 +119,7 @@ public class ExemplarView extends CrudView {
 	    botaoExcluir.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	ExemplarController.removerPorCod(Integer.parseInt(input_codigo.getText()));
-				JOptionPane.showMessageDialog(null, "Pessoa Excluída!");
+				JOptionPane.showMessageDialog(null, "Exemplar Excluído!");
 				janela.dispose();
 	        }
 	    });
