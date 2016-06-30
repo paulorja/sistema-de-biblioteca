@@ -79,6 +79,8 @@ public class PessoaView extends CrudView {
 
 	protected void acao_salvar() {
 		if(pessoa != null) {
+			pessoa.setNome(input_nome.getText());
+			
 			PessoaController.alterarPorCodMatricula(pessoa);
 			JOptionPane.showMessageDialog(null, "Pessoa editada!");
 		} else {

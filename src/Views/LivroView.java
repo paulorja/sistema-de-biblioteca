@@ -71,6 +71,9 @@ public class LivroView extends CrudView {
 
 	protected void acao_salvar() {
 		if(livro != null) {
+			livro.setAutor(input_autor.getText());
+			livro.setTitulo(input_titulo.getText());
+			
 			LivroController.alterarPorCod(livro);
 			JOptionPane.showMessageDialog(null, "Livro editado!");
 		} else {
