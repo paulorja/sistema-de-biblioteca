@@ -42,6 +42,12 @@ public class PessoaView extends CrudView {
 
 			input_nome.setText(pessoa.getNome());
 			input_matricula.setText(""+pessoa.getMatricula());
+			
+			if(pessoa.getTipo() == 'p') {
+				professor_radio.setSelected(true);
+			} else {
+				aluno_radio.setSelected(true);
+			}
 		} else {
 			janela.setTitle("Cadastro de Pessoa");
 		}
@@ -80,6 +86,11 @@ public class PessoaView extends CrudView {
 	protected void acao_salvar() {
 		if(pessoa != null) {
 			pessoa.setNome(input_nome.getText());
+			if(professor_radio.isSelected()) {
+				pessoa.setTipo('p');
+			} else {
+				pessoa.setTipo('a');
+			}
 			PessoaController.alterarPorCodMatricula(pessoa);
 			JOptionPane.showMessageDialog(null, "Pessoa editada!");
 		} else {
