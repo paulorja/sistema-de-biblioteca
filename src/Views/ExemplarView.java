@@ -1,8 +1,11 @@
 package Views;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -101,9 +104,17 @@ public class ExemplarView extends CrudView {
 		painel.setLayout(new GridLayout(5, 2));
 	}
 	
-	@Override
 	protected void prepara_botao_excluir() {
-		// TODO Auto-generated method stub
-		
+		botaoExcluir= new JButton("Excluir");
+	    
+	    botaoExcluir.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	ExemplarController.removerPorCod(Integer.parseInt(input_codigo.getText()));
+				JOptionPane.showMessageDialog(null, "Pessoa Excluída!");
+				janela.dispose();
+	        }
+	    });
+	    
+	    painel.add(botaoExcluir);
 	}
 }

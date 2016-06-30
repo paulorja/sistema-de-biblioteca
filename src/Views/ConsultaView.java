@@ -13,8 +13,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Controllers.ExemplarController;
 import Controllers.LivroController;
 import Controllers.PessoaController;
+import Models.Exemplar;
 import Models.Livro;
 import Models.Pessoa;
 
@@ -49,6 +51,13 @@ public class ConsultaView {
 				}
 				break;
 			case "exemplar":
+				Exemplar exemplar = ExemplarController.consultaPorCod(Integer.parseInt(input_busca.getText()));
+				if(exemplar != null) {
+					ExemplarView exemplar_view = new ExemplarView();
+					exemplar_view.mostrar_cadastro(exemplar);
+				} else {
+					JOptionPane.showMessageDialog(null, "Exemplar não encontrado. Tente novamente.");
+				}
 				break;
 			default:
 				break;
@@ -76,6 +85,7 @@ public class ConsultaView {
 		prepara_janela();
 		janela.setTitle("Consultar Exemplar");
 		texto_busca = "Cod do Exemplar:";
+		this.entidade = "exemplar";
 		prepara_painel();
 	}
 	
