@@ -43,7 +43,31 @@ public class ExemplarView extends CrudView {
 	}
 	
 	protected void acao_salvar() {
+		if(exemplar != null) {
+			//livro.setAutor(input_autor.getText());
+			//livro.setTitulo(input_titulo.getText());
+			
+			//LivroController.alterarPorCod(livro);
+			//JOptionPane.showMessageDialog(null, "Livro editado!");
+		} else {
+			Exemplar novoExemplar = new Exemplar(Integer.parseInt(input_codigo.getText()), get_cod_autor(), get_cod_matricula());
 
+			if(ExemplarController.inserir(novoExemplar) != null) {
+				JOptionPane.showMessageDialog(null, "Exemplar Inserido");
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro!");
+			}
+		}
+	}
+
+	private int get_cod_matricula() {
+		String[] array_pessoa = combo_box_pessoa.getSelectedItem().toString().split(" - ");
+		return Integer.parseInt(array_pessoa[0]);
+	}
+
+	private int get_cod_autor() {
+		String[] array_autor = combo_box_livro.getSelectedItem().toString().split(" - ");
+		return Integer.parseInt(array_autor[0]);
 	}
 
 	protected void prepara_form() {
