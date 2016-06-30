@@ -110,4 +110,10 @@ public class ExemplarView extends CrudView {
 			ExemplarController.removerPorCod(cod);
 		}
 	}
+
+	@Override
+	protected void prepara_botao_excluir() {
+		// TODO Auto-generated method stub
+		
+	}
 }

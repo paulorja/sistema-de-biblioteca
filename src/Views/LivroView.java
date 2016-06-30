@@ -138,4 +138,10 @@ public class LivroView extends CrudView {
 
 		LivroController.alterarPorCod(livro);
 	}
+
+	@Override
+	protected void prepara_botao_excluir() {
+		// TODO Auto-generated method stub
+		
+	}
 }

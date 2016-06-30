@@ -12,9 +12,11 @@ import javax.swing.border.EmptyBorder;
 public abstract class CrudView {
 	
 	protected JButton botaoCancelar;
-	private JButton botaoSalvar;
+	protected JButton botaoSalvar;
+	protected JButton botaoExcluir;
 	protected JFrame janela;
 	protected JPanel painel;
+	protected Boolean form_edit;
 
 	protected void mostrar_cadastro() {
 		janela = new JFrame("Cadastro");
@@ -68,5 +70,6 @@ public abstract class CrudView {
 	
 	protected abstract void acao_salvar();
 	protected abstract void prepara_form();
+	protected abstract void prepara_botao_excluir();
 	
 }

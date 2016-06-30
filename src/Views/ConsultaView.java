@@ -7,10 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import Controllers.PessoaController;
+import Models.Pessoa;
 
 public class ConsultaView {
 	
@@ -20,15 +24,53 @@ public class ConsultaView {
 	protected JPanel painel;
 	private JTextField input_busca;
 	private String texto_busca;
-	
+	private String entidade;
 	
 	private void acao_pesquisar() {
-	
+		switch (this.entidade) {
+			case "pessoa":
+				Pessoa pessoa = PessoaController.consultaPorCodMatricula(Integer.parseInt(input_busca.getText()));
+				if(pessoa != null) {
+					PessoaView pessoa_view = new PessoaView();
+					pessoa_view.mostrar_cadastro(pessoa);
+				} else {
+					JOptionPane.showMessageDialog(null, "Aluno n�o encontrado. Tente novamente.");
+				}
+				break;
+			case "livro":
+				break;
+			case "exemplar":
+				break;
+			default:
+				break;
+		}
 	}
 	
+	public void mostrar_consulta_pessoa() {
+		prepara_janela();
+		janela.setTitle("Consultar Pessoa");
+		texto_busca = "Cod Matrícula da Pessoa:";
+		this.entidade = "pessoa";
+		prepara_painel();
+	
+	}
+
+	public void mostrar_consulta_livro() {
+		prepara_janela();
+		janela.setTitle("Consultar Livro");
+		texto_busca = "Cod do Livro:";
+		prepara_painel();
+	}
+
+	public void mostrar_consulta_exemplar() {
+		prepara_janela();
+		janela.setTitle("Consultar Exemplar");
+		texto_busca = "Cod do Exemplar:";
+		prepara_painel();
+	}
 	
 	protected void prepara_botao_salvar() {
-		botaoPesquisar = new JButton("Salvar");
+		botaoPesquisar = new JButton("Pesquisar");
 	    
 		botaoPesquisar.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
@@ -81,32 +123,4 @@ public class ConsultaView {
 		janela.setVisible(true);  		
 	}
 	
-	public void mostrar_consulta_aluno() {
-		prepara_janela();
-		janela.setTitle("Consultar Aluno");
-		texto_busca = "Cod Matrícula do Aluno:";
-		prepara_painel();
-	
-	}
-
-	public void mostrar_consulta_professor() {
-		prepara_janela();
-		janela.setTitle("Consultar Professor");
-		texto_busca = "Cod Matrícula do Professor:";
-		prepara_painel();
-	}
-	
-	public void mostrar_consulta_livro() {
-		prepara_janela();
-		janela.setTitle("Consultar Livro");
-		texto_busca = "Cod do Livro:";
-		prepara_painel();
-	}
-
-	public void mostrar_consulta_exemplar() {
-		prepara_janela();
-		janela.setTitle("Consultar Exemplar");
-		texto_busca = "Cod do Exemplar:";
-		prepara_painel();
-	}
 }

@@ -27,16 +27,30 @@ public class PessoaView extends CrudView {
 	private JTextField input_matricula;
 	private JRadioButton professor_radio;
 	private JRadioButton aluno_radio;
+	private Pessoa pessoa;
 
-	public void mostrar_cadastro() {
+	public void mostrar_cadastro(Pessoa pessoa) {
 		super.mostrar_cadastro();
 
-		janela.setTitle("Cadastro de Pessoa");
+		if(pessoa != null) {
+			this.pessoa = pessoa;
+			prepara_botao_excluir();
+			
+			janela.setTitle("Editar Pessoa");
+
+			input_matricula.disable();
+			
+			input_nome.setText(pessoa.getNome());
+			input_matricula.setText(""+pessoa.getMatricula());
+		} else {
+			janela.setTitle("Cadastro de Pessoa");
+		}
+		
 	}
 
 	protected void prepara_painel() {
 		super.prepara_painel();
-		painel.setLayout(new GridLayout(4, 2));
+		painel.setLayout(new GridLayout(5, 2));
 	}
 
 	protected void prepara_form() {
@@ -64,91 +78,33 @@ public class PessoaView extends CrudView {
 	}
 
 	protected void acao_salvar() {
-		Pessoa novaPessoa = new Pessoa(Integer.parseInt(input_matricula.getText()), 'p', input_nome.getText());
-
-		if(PessoaController.inserir(novaPessoa) != null) {
-			JOptionPane.showMessageDialog(null, "Pessoa inserida!");
-			janela.dispose();
+		if(pessoa != null) {
+			PessoaController.alterarPorCodMatricula(pessoa);
+			JOptionPane.showMessageDialog(null, "Pessoa editada!");
 		} else {
-			JOptionPane.showMessageDialog(null, "Erro!");
-		}
+			Pessoa novaPessoa = new Pessoa(Integer.parseInt(input_matricula.getText()), 'p', input_nome.getText());
 
-    	System.out.println("salvar!");
+			if(PessoaController.inserir(novaPessoa) != null) {
+				JOptionPane.showMessageDialog(null, "Pessoa inserida!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro!");
+			}
+		}
+		
+		janela.dispose();
 	}
-
-
-
-
-	// == OLD ==
-	public static void inserir() {
-		char tipo = JOptionPane.showInputDialog("Digite um tipo(a ou p): ").charAt(0);
-		if(tipo != 'a' && tipo != 'p') {
-			JOptionPane.showMessageDialog(null, "Tipo incorreto!");
-			return;
-		}
-		int codMatricula = Integer.parseInt(JOptionPane.showInputDialog("Digite um codigo de matrícula: "));
-		String nome = JOptionPane.showInputDialog("Digite um nome: ");
-
-		Pessoa novaPessoa = new Pessoa(codMatricula, tipo, nome);
-		if(PessoaController.inserir(novaPessoa) != null) {
-			JOptionPane.showMessageDialog(null, "Pessoa inserida!");
-		} else {
-			JOptionPane.showMessageDialog(null, "Código de matrícula já utilizado!");
-		}
-
-	}
-
-	public static void consultaPorCodMatricula() {
-		int codMatricula = Integer.parseInt(JOptionPane.showInputDialog("Digite o código de matrícula"));
-
-		Pessoa alunoPesquisado = PessoaController.consultaPorCodMatricula(codMatricula);
-
-		if(alunoPesquisado != null) {
-			menuPessoa(alunoPesquisado);
-		} else {
-			JOptionPane.showMessageDialog(null, "Não encotrado");
-		}
-
-	}
-
-	private static void remover(int codMatricula) {
-		if (JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja excluir a pessoa com o codigo "+codMatricula+"?") == 0) {
-			PessoaController.removerPorCodMatricula(codMatricula);
-		}
-	}
-
-	private static void alterar(int codMatricula) {
-		char tipo = JOptionPane.showInputDialog("Digite um tipo(a ou p): ").charAt(0);
-		String nome = JOptionPane.showInputDialog("Digite um nome: ");
-		Pessoa aluno = new Pessoa(codMatricula, tipo, nome);
-
-		PessoaController.alterarPorCodMatricula(aluno);
-	};
-
-	private static void menuPessoa(Pessoa alunoPesquisado) {
-
-		int opcao = Integer.parseInt(JOptionPane.showInputDialog("Pessoa encontrada: \n\n"
-				+ "Tipo: "+alunoPesquisado.getNomeTipo()+"\n"
-				+ "Matrícula: "+alunoPesquisado.getMatricula()+"\n"
-				+ "Nome: "+alunoPesquisado.getNome()+"\n"
-				+ "-----------------------------------\n"
-				+ "1 - Alterar \n"
-				+ "2 - Excluir \n"
-				+ "3 - Voltar \n"));
-
-		switch (opcao) {
-		case 1:
-			PessoaView.alterar(alunoPesquisado.getMatricula());
-			break;
-		case 2:
-			PessoaView.remover(alunoPesquisado.getMatricula());
-			break;
-		case 3:
-			break;
-		default:
-			break;
-		}
-
-
+	
+	protected void prepara_botao_excluir() {
+	    botaoExcluir= new JButton("Excluir");
+	    
+	    botaoExcluir.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	PessoaController.removerPorCodMatricula(Integer.parseInt(input_matricula.getText()));
+				JOptionPane.showMessageDialog(null, "Pessoa Excluída!");
+				janela.dispose();
+	        }
+	    });
+	    
+	    painel.add(botaoExcluir);
 	}
 }
