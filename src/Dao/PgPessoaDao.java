@@ -17,7 +17,8 @@ public class PgPessoaDao extends PgDaoFactory implements PessoaDao {
 		} catch (Exception e) {
             System.out.println(e);
         }
-		return pessoa;
+		Pessoa p = consultaPorCodMatricula(pessoa.getMatricula());
+		return p;
 	}
 
 	@Override
@@ -65,7 +66,19 @@ public class PgPessoaDao extends PgDaoFactory implements PessoaDao {
 
 	@Override
 	public ArrayList<Pessoa> listaPessoas() {
-		// TODO Auto-generated method stub
+		ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
+		try {
+			String sql=("SELECT matricula FROM Pessoa ");
+			ResultSet rs = executeQuery(sql);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			String[] pessoaPropriedades= new String[1];
+			while (rs.next()) {
+				pessoas.add(consultaPorCodMatricula(Integer.parseInt(pessoaPropriedades[0])));
+			}
+			return pessoas;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 
