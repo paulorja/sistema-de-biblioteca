@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,8 +51,11 @@ public class PessoaView extends CrudView {
 
 
 		painel.add(new JLabel("Tipo"));
-		aluno_radio = new JRadioButton("Aluno");
-		professor_radio = new JRadioButton("Professor");
+		aluno_radio = new JRadioButton("Aluno",true);
+		professor_radio = new JRadioButton("Professor",false);
+		ButtonGroup grupoPessoa = new ButtonGroup();
+		grupoPessoa.add(aluno_radio);
+		grupoPessoa.add(professor_radio);
 		JPanel radio_painel = new JPanel(new GridLayout(1, 2));
 		radio_painel.add(aluno_radio);
 		radio_painel.add(professor_radio);
