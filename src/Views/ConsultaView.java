@@ -13,7 +13,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Controllers.LivroController;
 import Controllers.PessoaController;
+import Models.Livro;
 import Models.Pessoa;
 
 public class ConsultaView {
@@ -34,10 +36,17 @@ public class ConsultaView {
 					PessoaView pessoa_view = new PessoaView();
 					pessoa_view.mostrar_cadastro(pessoa);
 				} else {
-					JOptionPane.showMessageDialog(null, "Aluno não encontrado. Tente novamente.");
+					JOptionPane.showMessageDialog(null, "Pessoa não encontrada. Tente novamente.");
 				}
 				break;
 			case "livro":
+				Livro livro = LivroController.consultaPorCod(Integer.parseInt(input_busca.getText()));
+				if(livro != null) {
+					LivroView livro_view = new LivroView();
+					livro_view.mostrar_cadastro(livro);
+				} else {
+					JOptionPane.showMessageDialog(null, "Livro não encontrado. Tente novamente.");
+				}
 				break;
 			case "exemplar":
 				break;
@@ -59,6 +68,7 @@ public class ConsultaView {
 		prepara_janela();
 		janela.setTitle("Consultar Livro");
 		texto_busca = "Cod do Livro:";
+		this.entidade = "livro";
 		prepara_painel();
 	}
 
