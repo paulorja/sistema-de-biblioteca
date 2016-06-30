@@ -67,19 +67,23 @@ public class PgPessoaDao extends PgDaoFactory implements PessoaDao {
 	@Override
 	public ArrayList<Pessoa> listaPessoas() {
 		ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
+		Pessoa p = new Pessoa();
 		try {
-			String sql=("SELECT matricula FROM Pessoa ");
-			ResultSet rs = executeQuery(sql);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			String[] pessoaPropriedades= new String[1];
-			while (rs.next()) {
-				pessoas.add(consultaPorCodMatricula(Integer.parseInt(pessoaPropriedades[0])));
-			}
+			String sql=("SELECT * FROM Pessoa");
+	        ResultSet rs = executeQuery(sql);
+	        while (rs.next()) {
+				p = new Pessoa();
+				p.setMatricula(rs.getInt("matricula"));
+				p.setTipo(rs.getString("tipo").charAt(0));
+				p.setNome(rs.getString("name"));
+				pessoas.add(p);
+				p=null;
+	        }
 			return pessoas;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return null;
+		return pessoas;
 	}
 
 }

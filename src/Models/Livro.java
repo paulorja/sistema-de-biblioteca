@@ -1,17 +1,22 @@
 package Models;
 
 public class Livro {
-	
+
 	private int codigo;
 	private String titulo;
 	private String autor;
-	
+
 	public Livro(int codigo, String titulo, String autor) {
 		setCodigo(codigo);
 		setTitulo(titulo);
 		setAutor(autor);
 	}
-	
+	public Livro() {
+		setCodigo(123);
+		setTitulo("zero");
+		setAutor("tre");
+	}
+
 	public int getCodigo() {
 		return this.codigo;
 	}

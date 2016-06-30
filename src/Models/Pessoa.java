@@ -8,11 +8,16 @@ public class Pessoa {
 	private int matricula;
 	private char tipo;
 	private String nome;
-	
+
 	public Pessoa(int matricula, char tipo, String nome) {
 		setMatricula(matricula);
 		setTipo(tipo);
 		setNome(nome);
+	}
+	public Pessoa() {
+		matricula=1;
+		tipo='a';
+		nome="j";
 	}
 
 	public String getNome() {
@@ -52,5 +57,5 @@ public class Pessoa {
 		}
 		return "tipo incorreto";
 	}
-	
+
 }

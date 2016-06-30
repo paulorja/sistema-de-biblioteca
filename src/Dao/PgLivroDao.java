@@ -65,8 +65,24 @@ public class PgLivroDao extends PgDaoFactory implements LivroDao {
 
 	@Override
 	public ArrayList<Livro> listaLivros() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Livro> livros = new ArrayList<Livro>();
+		Livro l = new Livro();
+		try {
+			String sql=("SELECT * FROM Livro");
+	        ResultSet rs = executeQuery(sql);
+	        while (rs.next()) {
+				l = new Livro();
+				l.setCodigo(rs.getInt("codigo"));
+				l.setTitulo(rs.getString("titulo"));
+				l.setAutor(rs.getString("autor"));
+				livros.add(l);
+				l=null;
+	        }
+			return livros;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return livros;
 	}
 
 }
