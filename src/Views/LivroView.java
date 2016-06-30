@@ -23,38 +23,38 @@ import Models.Pessoa;
 import Models.Livro;
 
 public class LivroView extends CrudView {
-	
+
 	private JTextField input_codigo;
 	private JTextField input_titulo;
 	private JTextField input_autor;
-	
+
 	protected void mostrar_cadastro() {
 		super.mostrar_cadastro();
-		
+
 		janela.setTitle("Cadastro de Livro");
 	}
-	
+
 	protected void prepara_painel() {
 		super.prepara_painel();
 		painel.setLayout(new GridLayout(4, 2));
 	}
-	
+
 	protected void prepara_form() {
-		
+
 		painel.add(new JLabel("Código"));
-		input_codigo = new JTextField();		
+		input_codigo = new JTextField();
 		painel.add(input_codigo);
-		
+
 		painel.add(new JLabel("Titulo"));
 		input_titulo = new JTextField();
 		painel.add(input_titulo);
-		
+
 		painel.add(new JLabel("Autor"));
 		input_autor = new JTextField();
 		painel.add(input_autor);
-		
+
 	}
-	
+
 	protected void acao_salvar() {
 		Livro novoLivro = new Livro(Integer.parseInt(input_codigo.getText()), input_titulo.getText(), input_autor.getText());
 
@@ -64,20 +64,20 @@ public class LivroView extends CrudView {
 		} else {
 			JOptionPane.showMessageDialog(null, "Erro!");
 		}
-		
+
     	System.out.println("salvar!");
 	}
-	
 
-	
-	
-	// == OLD == 
-	
+
+
+
+	// == OLD ==
+
 	public static void inserir() {
 		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do livro: "));
 		String titulo = JOptionPane.showInputDialog("Digite o título do livro: ");
 		String autor = JOptionPane.showInputDialog("Digite o autor do livro: ");
-		
+
 		Livro novoLivro = new Livro(codigo, titulo, autor);
 		if(LivroController.inserir(novoLivro) != null) {
 			JOptionPane.showMessageDialog(null, "Livro inserido!");
@@ -85,18 +85,18 @@ public class LivroView extends CrudView {
 			JOptionPane.showMessageDialog(null, "Código já utilizado!!");
 		}
 	}
-	
+
 	public static void consultarPorCod() {
 		int cod = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do livro: "));
-		
+
 		Livro livroPesquisado = LivroController.consultaPorCod(cod);
-		
+
 		if(livroPesquisado != null) {
 			menuLivro(livroPesquisado);
 		} else {
 			JOptionPane.showMessageDialog(null, "Não encotrado");
 		}
-		
+
 	}
 
 
@@ -109,7 +109,7 @@ public class LivroView extends CrudView {
 				+ "1 - Alterar \n"
 				+ "2 - Excluir \n"
 				+ "3 - Voltar \n"));
-		
+
 		switch (opcao) {
 		case 1:
 			LivroView.alterar(livroPesquisado.getCodigo());
@@ -133,9 +133,9 @@ public class LivroView extends CrudView {
 	private static void alterar(int cod) {
 		String titulo = JOptionPane.showInputDialog("Digite o título do livro: ");
 		String autor = JOptionPane.showInputDialog("Digite o autor do livro: ");
-		
+
 		Livro livro = new Livro(cod, titulo, autor);
-		
+
 		LivroController.alterarPorCod(livro);
 	}
 }

@@ -12,14 +12,16 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Controllers.PessoaController;
+
 public class RemoveView {
 
 	protected JButton botaoCancelar;
 	private JButton botaoRemover;
 	protected JFrame janela;
 	protected JPanel painel;
-	private JTextField input_busca;
-	private String texto_busca;
+	private JTextField input_remove;
+	private String texto_remove;
 
 
 	private void acao_remover() {
@@ -64,9 +66,9 @@ public class RemoveView {
 	};
 
 	protected void prepara_form() {
-		painel.add(new JLabel(texto_busca));
-		input_busca = new JTextField();
-		painel.add(input_busca);
+		painel.add(new JLabel(texto_remove));
+		input_remove = new JTextField();
+		painel.add(input_remove);
 	}
 
 
@@ -81,32 +83,25 @@ public class RemoveView {
 		janela.setVisible(true);
 	}
 
-	public void remover_aluno() {
+	public void remover_pessoa() {
 		prepara_janela();
-		janela.setTitle("Remover Aluno");
-		texto_busca = "Cod Matrícula do Aluno:";
+		janela.setTitle("Remover Pessoa");
+		texto_remove = "Cod da Pessoa:";
 		prepara_painel();
 
-	}
-
-	public void remover_professor() {
-		prepara_janela();
-		janela.setTitle("Remover Professor");
-		texto_busca = "Cod Matrícula do Professor:";
-		prepara_painel();
 	}
 
 	public void remover_livro() {
 		prepara_janela();
 		janela.setTitle("Remover Livro");
-		texto_busca = "Cod do Livro:";
+		texto_remove = "Cod do Livro:";
 		prepara_painel();
 	}
 
 	public void remover_exemplar() {
 		prepara_janela();
 		janela.setTitle("Remover Exemplar");
-		texto_busca = "Cod do Exemplar:";
+		texto_remove = "Cod do Exemplar:";
 		prepara_painel();
 	}
 }

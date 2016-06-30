@@ -44,6 +44,9 @@ public class MenuView {
 		case "sair":
 			janela.dispose();
 			break;
+		case "mudar_dao":
+			alterar_dao();
+			break;
 		case "cadastro_pessoa":
 			pessoa_view.mostrar_cadastro();
 			break;
@@ -65,11 +68,8 @@ public class MenuView {
 		case "consulta_exemplar":
 			consulta_view.mostrar_consulta_exemplar();
 			break;
-		case "remover_aluno":
-			remover_view.remover_aluno();
-			break;
-		case "remover_prof":
-			remover_view.remover_professor();
+		case "remover_pessoa":
+			remover_view.remover_pessoa();
 			break;
 		case "remover_livro":
 			remover_view.remover_livro();
@@ -82,7 +82,9 @@ public class MenuView {
 			break;
 		}
 	}
-
+	private void alterar_dao(){
+			Dao.DaoFactory.SELECT_DAO = Integer.parseInt(JOptionPane.showInputDialog("Digite 1 para arquivo e 2 para banco: "));
+	}
 	private JMenuBar barraMenu() {
 	      final JMenuBar menuBar = new JMenuBar();
 	      MenuItemListener menuItemListener = new MenuItemListener();
@@ -91,6 +93,9 @@ public class MenuView {
 
 	      JMenuItem sair = new JMenuItem("Sair");
 		  sair.setActionCommand("sair");
+
+		  JMenuItem mudar_dao = new JMenuItem("Mudar Dao");
+		  mudar_dao.setActionCommand("mudar_dao");
 
 	      JMenu cadastros = new JMenu("Cadastros");
 
@@ -119,11 +124,9 @@ public class MenuView {
 
 		  JMenu remover = new JMenu("Remover");
 
-	      JMenuItem remover_aluno = new JMenuItem("Aluno");
-	      remover_aluno.setActionCommand("remover_aluno");
+	      JMenuItem remover_pessoa = new JMenuItem("Pessoa");
+	      remover_pessoa.setActionCommand("remover_pessoa");
 
-	      JMenuItem remover_prof = new JMenuItem("Professor");
-	      remover_prof.setActionCommand("remover_prof");
 
 	      JMenuItem remover_livro = new JMenuItem("Livro");
 	      remover_livro.setActionCommand("remover_livro");
@@ -132,6 +135,7 @@ public class MenuView {
 	      remover_exemplar.setActionCommand("remover_exemplar");
 
 	      arquivo.add(sair);
+		  arquivo.add(mudar_dao);
 
 	      cadastros.add(cadastros_pessoa);
 	      cadastros.add(cadastros_livro);
@@ -142,8 +146,7 @@ public class MenuView {
 	      consultas.add(consultas_livro);
 	      consultas.add(consultas_exemplar);
 
-		  remover.add(remover_aluno);
-	      remover.add(remover_prof);
+		  remover.add(remover_pessoa);
 	      remover.add(remover_livro);
 	      remover.add(remover_exemplar);
 
@@ -154,6 +157,7 @@ public class MenuView {
 		  menuBar.add(remover);
 
 	      sair.addActionListener(menuItemListener);
+		  mudar_dao.addActionListener(menuItemListener);
 		  cadastros_pessoa.addActionListener(menuItemListener);
 		  cadastros_livro.addActionListener(menuItemListener);
 		  cadastros_exemplar.addActionListener(menuItemListener);
@@ -161,8 +165,7 @@ public class MenuView {
 	      consultas_prof.addActionListener(menuItemListener);
 	      consultas_livro.addActionListener(menuItemListener);
 	      consultas_exemplar.addActionListener(menuItemListener);
-		  remover_aluno.addActionListener(menuItemListener);
-	      remover_prof.addActionListener(menuItemListener);
+		  remover_pessoa.addActionListener(menuItemListener);
 	      remover_livro.addActionListener(menuItemListener);
 	      remover_exemplar.addActionListener(menuItemListener);
 
